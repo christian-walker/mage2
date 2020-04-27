@@ -1,0 +1,33 @@
+ <script type="text/x-magento-init">
+    {
+      "*": {
+        "Magento_Ui/js/core/app": {
+          "components": {
+              "startSimple": {
+                "component": "Mage2tv_Js/js/plain-view-model",
+                "base_url": "<?= $block->escapeJs($block->getBaseUrl()) ?>"
+
+              }
+          }
+        }
+      }
+    }
+</script>
+
+<div id="target">This is my content</div>
+<div data-bind="scope: 'startSimple'">
+<!--   <pre data-bind="text: output"></pre>-->
+    <table>
+        <tr>
+            <th data-bind="i18n: 'Currency To'"></th>
+            <th data-bind="i18n: 'Rate'"></th>
+        </tr>
+
+        <!-- ko foreach: exchange_rates -->
+        <tr>
+            <td data-bind="text: (console.log(currency_to), currency_to)"></td>
+            <td data-bind="text: rate"></td>
+        </tr>
+        <!-- /ko -->
+    </table>
+</div>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Walker Team
+ * @copyright Copyright © Christian Walker)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Mage2tv_Js/js/script-example.js" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="mage2tv-js" template="Mage2tv_Js::js-container.phtml" />
+        </referenceContainer>
+    </body>
+</page>
