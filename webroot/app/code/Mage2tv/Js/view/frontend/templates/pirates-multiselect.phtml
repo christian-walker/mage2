@@ -17,7 +17,7 @@
     <select data-bind="options: pirates, selectedOptions: chosenPirates" multiple="true">
         <option data-bind="text $data"></option>
     </select>
-    <textarea data-bind="text: pirateList"></textarea>
+    <textarea data-bind="textInput: pirateList, event: {change: resetChosen}" class="textarea"></textarea>
     <input data-bind="textInput: itemToAdd" />
     <button data-bind="click: addItem">Add Item</button>
 </div>

@@ -1,0 +1,29 @@
+ <script type="text/x-magento-init">
+    {
+      "*": {
+        "Magento_Ui/js/core/app": {
+          "components": {
+              "exampleUiComponent": {
+                "component": "Mage2tv_Js/js/ui-component",
+                  "children": {
+                    "child1": {
+                        "component": "Mage2tv_Js/js/ui-component",
+                        "template": "Mage2tv_Js/ui-template",
+                          "children": {
+                            "child2": {
+                              "component": "Mage2tv_Js/js/ui-component",
+                              "template": "Mage2tv_Js/ui-template"
+                            }
+                      }
+                    }
+                  }
+              }
+          }
+        }
+      }
+    }
+</script>
+
+ <div data-bind="scope: 'exampleUiComponent'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+ </div>

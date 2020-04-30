@@ -1,5 +1,5 @@
 define(['jquery','ko'], function($, ko){
-    'use stgrict';
+    'use strict';
 
     return function(config) {
         // const title = ko.observable('This is a very fine title for a simple but good view model');
@@ -33,8 +33,8 @@ define(['jquery','ko'], function($, ko){
         //
         // }.bind(viewModel));
 
-        const viewModel = ko.track({
-            exchange_rates: [
+        const viewModel = {
+            exchange_rates: ko.observableArray([
                 {
                     currency_to: 'USD',
                     rate: 1.0,
@@ -47,12 +47,12 @@ define(['jquery','ko'], function($, ko){
                     currency_to: 'NZD',
                     rate: 1.43
                 }
-            ]
-        });
+            ]),
+        };
 
-        ko.getObservable(viewModel,'exchange_rates').subscribe(function (newValue) {
-            console.log('The new value changed to: ', newValue);
-        });
+        // ko.getObservable(viewModel,'exchange_rates').subscribe(function (newValue) {
+        //     console.log('The new value changed to: ', newValue);
+        // });
 
 
         return viewModel;

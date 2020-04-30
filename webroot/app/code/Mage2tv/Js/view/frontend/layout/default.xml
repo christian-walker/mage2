@@ -13,7 +13,7 @@
         <referenceContainer name="content">
             <block class="Magento\Framework\View\Element\Template" name="mage2tv-js" template="Mage2tv_Js::js-container.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="mage2tv-ko" template="Mage2tv_Js::pirates-multiselect.phtml" />
-<!--            <block class="Magento\Framework\View\Element\Template" name="mage2tv-ui-component" template="Mage2tv_Js::ui-container.phtml" />-->
+            <block class="Magento\Framework\View\Element\Template" name="mage2tv-ui-component" template="Mage2tv_Js::ui-container.phtml" />
         </referenceContainer>
     </body>
 </page>
