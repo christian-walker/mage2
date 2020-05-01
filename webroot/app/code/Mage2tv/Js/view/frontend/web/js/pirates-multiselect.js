@@ -31,8 +31,8 @@ define(['jquery','ko'], function ($, ko) {
             let deletedPirates = [];
 
             newChosen = $('.textarea').val().split('\n');
-            for (let i = 0; i < newShit.length; i++){
-                this.arrayOfLines.push(newShit[i]);
+            for (let i = 0; i < newChosen.length; i++){
+                this.arrayOfLines.push(newChosen[i]);
             }
 
             deletedPirates = this.chosenPirates().filter(function (currentItem) {
@@ -44,7 +44,7 @@ define(['jquery','ko'], function ($, ko) {
         }.bind(viewModel);
 
         viewModel.pirateList = ko.computed(function(){
-            var newPirateList = [];
+            let newPirateList = [];
             newPirateList = this.chosenPirates();
             newPirateList.forEach(function (pirate) {
                 return pirate + '\n';
