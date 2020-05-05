@@ -1,0 +1,17 @@
+<script type="text/x-magento-init">
+    {
+      "*": {
+        "Magento_Ui/js/core/app": {
+          "components": {
+            "walker-stateful": {
+                "component": "Walker_StatefulUiComponent/js/stateful-example"
+            }
+          }
+        }
+      }
+    }
+</script>
+<div data-bind="scope: 'walker-stateful'">
+    <span>Your input:</span>
+    <input data-bind="textInput: input" autofocus/>
+</div>
