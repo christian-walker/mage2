@@ -13,7 +13,28 @@
         <referenceContainer name="content">
             <block class="Magento\Framework\View\Element\Template" name="mage2tv-js" template="Mage2tv_Js::js-container.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="mage2tv-ko" template="Mage2tv_Js::pirates-multiselect.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="mage2tv-weights" template="Mage2tv_Js::weights.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="mage2tv-ui-component" template="Mage2tv_Js::ui-container.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="mage2tv-ui-component-imports" template="Mage2tv_Js::ui-container-imports.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="component-a" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="component" xsi:type="string">Mage2tv_Js/js/ui-component-a</item>
+                                    <item name="label" xsi:type="string">Component A</item>
+                                </item>
+                            </item>
+                            <item name="component-b" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="component" xsi:type="string">Mage2tv_Js/js/ui-component-b</item>
+                                    <item name="title" xsi:type="string">Component B</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
         </referenceContainer>
     </body>
 </page>

@@ -1,0 +1,19 @@
+<script type="text/x-magento-init">
+    {
+        "*": {
+          "Magento_Ui/js/core/app": {
+            "components": {
+              "weights": {
+                "component": "Mage2tv_Js/js/weights",
+                "template": "Mage2tv_Js/weights",
+                "label": "This is the weights label"
+              }
+            }
+          }
+        }
+    }
+</script>
+
+<div data-bind="scope: 'weights'">
+    <!--ko template: getTemplate() --><!-- /ko -->
+</div>

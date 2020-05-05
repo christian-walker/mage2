@@ -4,26 +4,25 @@
         "Magento_Ui/js/core/app": {
           "components": {
               "exampleUiComponent": {
-                "component": "Mage2tv_Js/js/ui-component",
-                  "children": {
-                    "child1": {
-                        "component": "Mage2tv_Js/js/ui-component",
-                        "template": "Mage2tv_Js/ui-template",
-                          "children": {
-                            "child2": {
-                              "component": "Mage2tv_Js/js/ui-component",
-                              "template": "Mage2tv_Js/ui-template"
-                            }
-                      }
-                    }
+                "component": "Mage2tv_Js/js/ui-component"
+
                   }
               }
           }
-        }
-      }
+       }
     }
 </script>
 
  <div data-bind="scope: 'exampleUiComponent'">
-    <!-- ko template: getTemplate() --><!-- /ko -->
+    <h3 data-bind="text: label"></h3>
+     <table data-bind="foreach: items">
+         <tr>
+             <td data-bind="text: name"></td>
+             <td data-bind="text: qty"></td>
+             <td data-bind="text: price"></td>
+             <td data-bind="text: $parent.rowTotal($data)"></td>
+         </tr>
+     </table>
+     <div>Additional Charge: <span data-bind="text: additional_charge"></span></div>
+     <strong>Total: <span data-bind="text: total()"></span></strong>
  </div>
