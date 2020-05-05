@@ -263,6 +263,9 @@ return [
         'Temando_Shipping' => 1,
         'Vertex_Tax' => 1,
         'Vertex_AddressValidation' => 1,
+        'Walker_CmsContent' => 1,
+        'Walker_Minicart' => 1,
+        'Walker_StatefulUiComponent' => 1,
         'Yotpo_Yotpo' => 1,
     ],
     'scopes' => [
