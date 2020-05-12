@@ -266,6 +266,7 @@ return [
         'Walker_CmsContent' => 1,
         'Walker_Minicart' => 1,
         'Walker_StatefulUiComponent' => 1,
+        'Walker_Underscore' => 1,
         'Yotpo_Yotpo' => 1,
     ],
     'scopes' => [

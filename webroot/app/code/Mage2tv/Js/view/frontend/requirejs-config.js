@@ -1,7 +1,8 @@
 var config = {
     map: {
         '*': {
-            coffee: 'Mage2tv_Js/js/requirejs-example'
+            coffee: 'Mage2tv_Js/js/requirejs-example',
+            templateExample: 'Mage2tv_Js/js/template-example'
         }
     },
     config: {
