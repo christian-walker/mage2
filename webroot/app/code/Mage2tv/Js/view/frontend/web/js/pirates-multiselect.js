@@ -1,4 +1,4 @@
-define(['jquery','ko','underscore'], function ($, ko, _) {
+define(['jquery','ko'], function ($, ko) {
     "use strict";
 
     return function (config) {
@@ -14,7 +14,8 @@ define(['jquery','ko','underscore'], function ($, ko, _) {
             ]),
             chosenPirates: ko.observableArray(),
             itemToAdd: ko.observable(""),
-            arrayOfLines: ko.observableArray()
+            arrayOfLines: ko.observableArray(),
+            deletedPirates: ko.observableArray()
         };
 
         viewModel.addItem = function(){
@@ -29,19 +30,26 @@ define(['jquery','ko','underscore'], function ($, ko, _) {
         viewModel.resetChosen = function(){
             let newChosen = [];
 
+
             newChosen = $('.textarea').val().split('\n');
             for (let i = 0; i < newChosen.length; i++){
                 this.arrayOfLines.push(newChosen[i]);
             }
 
-            let deletedPirates = _.filter(this.chosenPirates(), function (currentItem) {
+            this.deletedPirates = this.chosenPirates().filter(function (currentItem) {
                 if(!this.arrayOfLines().includes(currentItem)){
-                    return currentItem;
+                    return this.deletedPirates.push(currentItem);
                 }
-
             }.bind(viewModel));
 
-            return this.chosenPirates().pop(deletedPirates);
+            for (var i = 0; i < this.deletedPirates.length; i++){
+                let deletedItem = this.chosenPirates.indexOf(this.deletedPirates[i]);
+                if (text > -1){
+                    this.chosenPirates.splice(deletedItem, 1);
+                }
+            }
+
+
 
         }.bind(viewModel);
 
@@ -53,12 +61,6 @@ define(['jquery','ko','underscore'], function ($, ko, _) {
             });
             return newPirateList.join('\n');
 
-        }.bind(viewModel));
-
-        viewModel.listPirates = ko.computed(function () {
-            _.each(this.pirates(), function (element, key, list) {
-                console.log(element, key, list);
-            });
         }.bind(viewModel));
 
         return viewModel;
