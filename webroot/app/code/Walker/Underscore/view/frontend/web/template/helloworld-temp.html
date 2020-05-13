@@ -1,0 +1,13 @@
+<ul class="items">
+    <% _.each(musicians, function(musician) { %>
+    <li class="item">
+        <% if (musician.link) { %>
+        <a href="<%= musician.link %>" title="<%- musician.title %>"><%- musician.label %></a>
+        <% } else if (musician.last) { %>
+        <strong><%= musician.name %></strong>
+        <% } else { %>
+        <%= musician.name %>
+        <% } %>
+    </li>
+    <% }); %>
+</ul>
