@@ -266,12 +266,11 @@ return [
         'Vertex_Tax' => 1,
         'Vertex_AddressValidation' => 1,
         'Walker_CmsContent' => 1,
+        'Walker_GalleryMinWidth' => 1,
         'Walker_Minicart' => 1,
         'Walker_ProceedToCheckout' => 1,
-        'Walker_Qty' => 1,
         'Walker_StatefulUiComponent' => 1,
         'Walker_TrainingJsWidget' => 1,
-        'Walker_Underscore' => 1,
         'Yotpo_Yotpo' => 1,
     ],
     'scopes' => [
