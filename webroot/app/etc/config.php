@@ -268,6 +268,7 @@ return [
         'Walker_CmsContent' => 1,
         'Walker_GalleryMinWidth' => 1,
         'Walker_Minicart' => 1,
+        'Walker_PriceUSD' => 1,
         'Walker_ProceedToCheckout' => 1,
         'Walker_StatefulUiComponent' => 1,
         'Walker_TrainingJsWidget' => 1,
