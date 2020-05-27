@@ -270,6 +270,7 @@ return [
         'Walker_Minicart' => 1,
         'Walker_PriceUSD' => 1,
         'Walker_ProceedToCheckout' => 1,
+        'Walker_Qty' => 1,
         'Walker_StatefulUiComponent' => 1,
         'Walker_TrainingJsWidget' => 1,
         'Yotpo_Yotpo' => 1,
