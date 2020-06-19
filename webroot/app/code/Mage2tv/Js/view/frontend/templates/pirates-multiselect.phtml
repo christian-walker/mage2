@@ -1,0 +1,23 @@
+<script type="text/x-magento-init">
+    {
+     "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "piratesSelect": {
+                    "component": "Mage2tv_Js/js/pirates-multiselect"
+                }
+            }
+        }
+     }
+    }
+</script>
+
+
+<div data-bind="scope: 'piratesSelect'">
+    <select data-bind="options: pirates, selectedOptions: chosenPirates" multiple="true">
+        <option data-bind="text $data"></option>
+    </select>
+    <textarea data-bind="textInput: pirateList, event: {change: resetChosen}" class="textarea"></textarea>
+    <input data-bind="textInput: itemToAdd" />
+    <button data-bind="click: addItem">Add Item</button>
+</div>
