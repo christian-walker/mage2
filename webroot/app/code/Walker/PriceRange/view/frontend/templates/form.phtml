@@ -1,0 +1,24 @@
+<?php
+
+/** @var \Walker\PriceRange\Block\Index $block */
+?>
+
+<script type="text/x-magento-init">
+    {
+        ".form-price-range": {
+            "validation": {}
+        }
+    }
+</script>
+
+<div>
+    <form class="form-price-range" data-mage-init='
+    {"formPriceRange": {"base_url": "<?= $block->getBaseUrl()?>"}}' method="POST" name="form_value">
+        <input type="text" id="low-range" name="low_range" required="true"/>
+        <input type="text" id="high-range" name="high_range" required="true" />
+        <input type="submit" id="range" name="price_range" value="Submit" />
+    </form>
+</div>
+
+
+<div id="results"></div>

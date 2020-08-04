@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Walker Team
+ * @copyright Copyright © Christian Walker)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_category_view" />
+    <update handle="customer_account"/>
+    <head>
+        <title>Price Range</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Walker\PriceRange\Block\Index" name="walker.price.range" template="Walker_PriceRange::form.phtml" before="-"/>
+        </referenceContainer>
+    </body>
+</page>
