@@ -1,4 +1,4 @@
-define(['jquery','ko'], function ($, ko) {
+define(['jquery','ko','underscore'], function ($, ko, _) {
     "use strict";
 
     return function (config) {
@@ -28,18 +28,20 @@ define(['jquery','ko'], function ($, ko) {
 
         viewModel.resetChosen = function(){
             let newChosen = [];
-            let deletedPirates = [];
 
             newChosen = $('.textarea').val().split('\n');
             for (let i = 0; i < newChosen.length; i++){
                 this.arrayOfLines.push(newChosen[i]);
             }
 
-            deletedPirates = this.chosenPirates().filter(function (currentItem) {
-                return !this.arrayOfLines().includes(currentItem);
+            let deletedPirates = _.filter(this.chosenPirates(), function (currentItem) {
+                if(!this.arrayOfLines().includes(currentItem)){
+                    return currentItem;
+                }
+
             }.bind(viewModel));
 
-            return this.chosenPirates.pop(deletedPirates);
+            return this.chosenPirates().pop(deletedPirates);
 
         }.bind(viewModel);
 
@@ -51,6 +53,12 @@ define(['jquery','ko'], function ($, ko) {
             });
             return newPirateList.join('\n');
 
+        }.bind(viewModel));
+
+        viewModel.listPirates = ko.computed(function () {
+            _.each(this.pirates(), function (element, key, list) {
+                console.log(element, key, list);
+            });
         }.bind(viewModel));
 
         return viewModel;
