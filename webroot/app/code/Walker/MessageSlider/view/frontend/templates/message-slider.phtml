@@ -1,0 +1,32 @@
+<div data-bind="scope: 'customer-slider'">
+    <!-- ko if: customer().fullname  -->
+<div class="message-slider" data-mage-init='{"slick-slider": {}}'>
+    <div>Message Slider Customer 1</div>
+    <div>Message Slider Customer 2</div>
+    <div>Message Slider Customer 3</div>
+</div>
+    <!-- /ko -->
+    <!-- ko ifnot: customer().fullname -->
+    <div class="message-slider" data-mage-init='{"slick-slider": {}}'>
+        <div>Message Slider Guest 1</div>
+        <div>Message Slider Guest 2</div>
+        <div>Message Slider Guest 3</div>
+    </div>
+    <!-- /ko -->
+
+</div>
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "customer-slider": {
+                        "component": "Magento_Customer/js/view/customer"
+                    }
+                }
+            }
+        }
+    }
+</script>
