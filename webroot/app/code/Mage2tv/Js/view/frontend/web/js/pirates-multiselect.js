@@ -18,8 +18,7 @@ define(['jquery','ko','underscore'], function ($, ko, _) {
         };
 
         viewModel.addItem = function(){
-            if(this.pirates.indexOf(this.itemToAdd()) > -1){
-                console.log("Yes, this item exist");
+            if(this.pirates().includes(this.itemToAdd())){
                 this.chosenPirates.push(this.itemToAdd())
             } else {
                 this.pirates.push(this.itemToAdd());
@@ -28,20 +27,28 @@ define(['jquery','ko','underscore'], function ($, ko, _) {
 
         viewModel.resetChosen = function(){
             let newChosen = [];
+            let deletedPirates = [];
 
+            // Adds each element to newChosen Array;
             newChosen = $('.textarea').val().split('\n');
-            for (let i = 0; i < newChosen.length; i++){
-                this.arrayOfLines.push(newChosen[i]);
-            }
 
-            let deletedPirates = _.filter(this.chosenPirates(), function (currentItem) {
-                if(!this.arrayOfLines().includes(currentItem)){
-                    return currentItem;
+            // Filters through the old list of pirates, if item is missing add to deletedPirates array;
+            deletedPirates = _.filter(this.chosenPirates(), function (currentItem) {
+                if(!newChosen.includes(currentItem)){
+                    return deletedPirates.push(currentItem);
                 }
 
             }.bind(viewModel));
 
-            return this.chosenPirates().pop(deletedPirates);
+            // Loops through deletedPirates array and finds each element's position in the chosenPirates array, then
+            // removes items from chosenPirates
+
+            _.each(deletedPirates, function (element) {
+                let piratePosition = this.chosenPirates().indexOf(element);
+
+                return this.chosenPirates.splice(piratePosition, 1);
+
+            }.bind(viewModel));
 
         }.bind(viewModel);
 
@@ -53,12 +60,6 @@ define(['jquery','ko','underscore'], function ($, ko, _) {
             });
             return newPirateList.join('\n');
 
-        }.bind(viewModel));
-
-        viewModel.listPirates = ko.computed(function () {
-            _.each(this.pirates(), function (element, key, list) {
-                console.log(element, key, list);
-            });
         }.bind(viewModel));
 
         return viewModel;
