@@ -1,0 +1,99 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<li id="payment" role="presentation" class="checkout-payment-method" data-bind="fadeVisible: isVisible">
+
+    <div class="contact-email">
+        <div class="label-email" data-bind="i18n: 'Email'"></div>
+        <!-- ko if: isVisible() -->
+        <span data-bind="text: getEmail()"></span>
+        <!-- ko if: !isLoggedIn -->
+        <div class="edit-email"><span data-bind="i18n: 'Edit', click: backToContact"></span></div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+
+    <!-- ko if: (isVisibleElement()) -->
+        <!-- ko if: (shippingAddress()) -->
+        <div class="contact-shipping">
+            <div class="label-shipping" data-bind="i18n: 'Shipping'"></div>
+            <!-- ko foreach: { data: shippingAddress(), as: 'element' } -->
+            <div class="value-shipping-address">
+                <div><span><!-- ko text: firstname --><!-- /ko --></span> <span><!-- ko text: lastname --><!-- /ko --></span></div>
+                <div>
+                    <span><!-- ko text: street --><!-- /ko --></span>, <span><!-- ko text: city --><!-- /ko --></span>,
+                    <span><!-- ko text: region --><!-- /ko --></span>
+                    <span><!-- ko text: postcode --><!-- /ko --></span>
+                </div>
+            </div>
+            <!--/ko-->
+            <div class="edit-shipping"><span data-bind="i18n: 'Edit', click: backToShipping"></span></div>
+        </div>
+        <div class="contact-shipping">
+            <div class="label-shipping" data-bind="i18n: 'Delivery Date'"></div>
+            <span data-bind="text: deliveryDateInput"></span>
+            <div class="edit-shipping"><span data-bind="i18n: 'Edit', click: backToShipping"></span></div>
+        </div>
+        <!--/ko-->
+
+    <!-- ko ifnot: (shippingAddress()) -->
+    <div class="contact-shipping">
+        <div class="label-shipping" data-bind="i18n: 'Shipping'"></div>
+        <div class="value-shipping-address">
+            <div><span data-bind="i18n: 'No Shipping Information Provided'"></span></div>
+        </div>
+        <div class="edit-shipping"><span data-bind="i18n: 'Edit', click: backToShipping"></span></div>
+    </div>
+    <!--/ko-->
+
+    <!--/ko-->
+
+    <h2 class="step-title" data-bind="i18n: 'Payment'"></h2>
+    <p data-bind="i18n: 'We\'re almost done! Select your payment method. All transactions are secure and encrypted.'"></p>
+    <div id="checkout-step-payment"
+         class="step-content"
+         data-role="content"
+         role="tabpanel"
+         aria-hidden="false">
+        <form id="co-payment-form" class="form payments" novalidate="novalidate">
+            <input data-bind='attr: {value: getFormKey()}' type="hidden" name="form_key"/>
+            <fieldset class="fieldset">
+                <legend class="legend">
+                    <span data-bind="i18n: 'Payment Information'"></span>
+                </legend>
+                <!-- ko foreach: getRegion('beforeMethods') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
+                <div id="checkout-payment-method-load" class="opc-payment" data-bind="visible: isPaymentMethodsAvailable">
+                    <!-- ko foreach: getRegion('payment-methods-list') -->
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <div class="no-quotes-block" data-bind="visible: isPaymentMethodsAvailable() == false">
+                    <!-- ko i18n: 'No Payment method available.'--><!-- /ko -->
+                </div>
+                <!-- ko foreach: getRegion('afterMethods') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
+            </fieldset>
+        </form>
+
+        <form data-bind="submit: navigateToNextStep" novalidate="novalidate">
+            <div class="actions-toolbar">
+                <div role="alert"
+                     if="errorValidationMessage().length"
+                     class="message error">
+                    <span text="errorValidationMessage()" />
+                </div>
+                <div class="primary">
+                    <button data-role="opc-continue" type="submit" class="button action continue primary" id="continue-review">
+                        <span><!-- ko i18n: 'Continue To Review & Place Order'--><!-- /ko --></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</li>

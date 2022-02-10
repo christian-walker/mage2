@@ -1,0 +1,7 @@
+    <!-- ko if: (includesFrozenFood) -->
+        <div class="col-mp mp-12 field policy-agreement required">
+            <input type="checkbox" name="policy-agreement" value="yes" data-bind="checked: isPolicyAgreed, attr: {id: 'policy-agreement'}"/>
+            <label data-bind="attr: {for: 'policy-agreement'}"><span data-bind="i18n: 'Your order contains fresh and frozen product(s), you acknowledge the potential for thawing of your frozen product.'"></span></label>
+        </div>
+    <!-- /ko -->
+

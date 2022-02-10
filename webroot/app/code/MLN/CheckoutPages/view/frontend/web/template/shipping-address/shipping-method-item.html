@@ -1,0 +1,28 @@
+<tr class="row"
+    click="element.selectShippingMethod">
+    <td class="col col-method">
+        <input type="radio"
+               class="radio"
+               ifnot="method.error_message"
+               ko-checked="element.isSelected"
+               ko-value="method.carrier_code + '_' + method.method_code"
+               attr="'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code,
+                    'checked': element.rates().length == 1 || element.isSelected,
+                    'id': 'label_method_' + method.method_code + '_' + method.carrier_code" />
+        <label attr="'for': 'label_method_' + method.method_code + '_' + method.carrier_code">
+            <span class="col col-price">
+                <each args="element.getRegion('price')" render="" />
+            </span>
+            <span class="col col-method"
+                  attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code"
+                  text="method.method_title" />
+            <span class="col col-carrier"
+                  attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code"
+                  text="method.carrier_title" />
+        </label>
+        <!-- ko if:  method.error_message -->
+        <span class="error-message ship-restriction-text" text="method.error_message"></span>
+        <!-- /ko -->
+
+    </td>
+</tr>

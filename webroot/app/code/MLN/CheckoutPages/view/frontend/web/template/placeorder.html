@@ -1,0 +1,30 @@
+<div class="actions-toolbar">
+    <div class="primary">
+        <div data-bind="visible: isVisibleElement">
+            <div class="po-disclaimer">
+                <span data-bind="i18n: 'By clicking \'Place Order\' you acknowledge our'"></span>
+                <a data-bind="attr: { href: '/our-policies',}, i18n: 'terms and conditions'" target="_blank"></a>
+                <span data-bind="i18n: '.'"></span>
+
+                <div class="policy-checkbox-container">
+                    <!-- ko foreach: elems() -->
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <button class="action primary checkout mln_placeorder_button"
+                    type="submit"
+                    data-bind="
+                            click: placeOrder,
+                            attr: {title: $t('Place Order')},
+                            ">
+                <span data-bind="text: $t('Place Order')"></span>
+
+            </button>
+        </div>
+
+        <a class="action checkout continue_shopping_url" data-bind = "attr: { href: continueShoppingUrl}">Continue Shopping</a>
+
+
+    </div>
+</div>

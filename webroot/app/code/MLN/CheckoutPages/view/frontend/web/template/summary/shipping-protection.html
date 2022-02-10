@@ -1,0 +1,22 @@
+<!--
+/**
+ * Notify customers that they will receive free shipping protection.
+ */
+-->
+<tr class="totals shipping-protection">
+    <th class="mark _with-tooltip" scope="row">
+        <span data-bind="text: title"></span>
+        <!-- ko template: 'ui/form/element/helper/tooltip' --><!-- /ko -->
+    </th>
+    <td class="amount _with-tooltip">
+        <!-- ko if: getValue() == '$0.00' -->
+        <span class="price" data-bind ="text: 'Free', attr:{'data-label': title}"></span>
+        <!-- /ko -->
+        <!-- ko if: getValue() != '$0.00' -->
+        <span class="price" data-bind ="text: getValue(), attr:{'data-label': title}"></span>
+        <!-- /ko -->
+        <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    </td>
+</tr>

@@ -1,0 +1,134 @@
+<!-- Here id review_info is same as review-step.js step_code -->
+<li id="review_info" role="presentation" class="checkout-review-method" data-bind="fadeVisible: isVisible">
+    <div class="contact-email">
+        <div class="label-email" data-bind="i18n: 'Email'"></div>
+        <!-- ko if: isVisible() -->
+            <span data-bind="text: getEmail()"></span>
+            <!-- ko if: !isLoggedIn -->
+            <div class="edit-email"><span data-bind="i18n: 'Edit', click: backToContact"></span></div>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <!-- ko if: (billingAddress()) -->
+        <div class="contact-billing">
+            <div class="label-billing" data-bind="i18n: 'Billing'"></div>
+            <!-- ko foreach: { data: billingAddress(), as: 'element' } -->
+            <div class="value-billing-address">
+                <div><span><!-- ko text: firstname --><!-- /ko --></span> <span><!-- ko text: lastname --><!-- /ko --></span></div>
+                <div>
+                    <span><!-- ko text: street --><!-- /ko --></span>, <span><!-- ko text: city --><!-- /ko --></span>,
+                    <span><!-- ko text: region --><!-- /ko --></span>
+                    <span><!-- ko text: postcode --><!-- /ko --></span>
+                </div>
+            </div>
+            <!--/ko-->
+            <div class="edit-billing"><span data-bind="i18n: 'Edit', click: backToBilling"></span></div>
+        </div>
+    <!--/ko-->
+    <!-- ko ifnot: (billingAddress()) -->
+    <div class="contact-billing">
+        <div class="label-billing" data-bind="i18n: 'Billing'"></div>
+        <div class="value-billing-address error">
+            <div><span data-bind="i18n: 'No Billing Information Provided'"></span></div>
+        </div>
+        <div class="edit-billing"><span data-bind="i18n: 'Edit', click: backToBilling"></span></div>
+    </div>
+    <!--/ko-->
+
+    <!-- ko if: (isVisibleElement) -->
+        <!-- ko if: (shippingAddress()) -->
+        <div class="contact-shipping">
+            <div class="label-shipping" data-bind="i18n: 'Shipping'"></div>
+            <!-- ko foreach: { data: shippingAddress(), as: 'element' } -->
+            <div class="value-shipping-address">
+                <div><span><!-- ko text: firstname --><!-- /ko --></span> <span><!-- ko text: lastname --><!-- /ko --></span></div>
+                <div>
+                    <span><!-- ko text: street --><!-- /ko --></span>, <span><!-- ko text: city --><!-- /ko --></span>,
+                    <span><!-- ko text: region --><!-- /ko --></span>
+                    <span><!-- ko text: postcode --><!-- /ko --></span>
+                </div>
+            </div>
+            <!--/ko-->
+            <div class="edit-shipping"><span data-bind="i18n: 'Edit', click: backToShipping"></span></div>
+        </div>
+        <div class="contact-shipping">
+            <div class="label-shipping" data-bind="i18n: 'Delivery Date'"></div>
+            <!-- ko if: (getDeliveryDate()) -->
+            <span data-bind="text: deliveryDateInput"></span>
+            <!--/ko-->
+            <div class="edit-shipping"><span data-bind="i18n: 'Edit', click: backToShipping"></span></div>
+        </div>
+        <!--/ko-->
+        <!-- ko ifnot: (shippingAddress()) -->
+        <div class="contact-shipping">
+            <div class="label-shipping" data-bind="i18n: 'Shipping'"></div>
+            <div class="value-shipping-address">
+                <div><span data-bind="i18n: 'No Shipping Information Provided'"></span></div>
+            </div>
+            <div class="edit-shipping"><span data-bind="i18n: 'Edit', click: backToShipping"></span></div>
+        </div>
+        <!--/ko-->
+    <!--/ko-->
+         <div class="contact-payment">
+            <div class="label-payment" data-bind="i18n: 'Payment'"></div>
+             <div data-bind="fadeVisible: isVisible">
+                 <!-- ko if: isVisibleLoadElement() -->
+                    <!-- ko if: !isFreeMethod() -->
+                        <!-- ko if: getCCType() -->
+                         <span data-bind="attr: {
+                            class: 'cc-type cc-type-' + getCCType()
+                         }"></span>
+                         <!--/ko-->
+                        <!-- ko if: getCCLast4() -->
+                         <span data-bind="
+                            i18n: 'ending in ' + getCCLast4(),
+                            attr: {
+                                class: 'cc-info-text'
+                            }"></span>
+                         <!--/ko-->
+                        <!--/ko-->
+                     <!--/ko-->
+                     <!-- ko if: isFreeMethod() -->
+                     <span data-bind="i18n: 'Not Required'"></span>
+                     <!--/ko-->
+                 <!--/ko-->
+             </div>
+            <div class="edit-payment" data-bind="i18n: 'Edit', click: backToBilling">Edit</div>
+        </div>
+
+    <h2 class="step-title" data-bind="i18n: 'Review'"></h2>
+    <h3 data-bind="i18: 'Your Order'"></h3>
+    <p>
+        <span data-bind="i18n: 'Take a Moment to make sure that your order is correct. If you have any last-minute questions, give us a call at'"></span>
+        <a data-bind="attr: { href: 'tel:+12077998222',}, i18n: '207-799-8222'"></a><span data-bind="i18n: '.'"></span>
+    </p>
+    <div id="checkout-step-review"
+         class="step-content"
+         data-role="content"
+         role="tabpanel"
+         aria-hidden="false">
+        <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+
+
+            <!-- ko foreach: getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit"
+                        data-bind="
+                        attr: {title: $t('Place Order')},
+                        click: placeorder
+                        "
+                        class="action primary checkout-review"
+                >
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</li>
+

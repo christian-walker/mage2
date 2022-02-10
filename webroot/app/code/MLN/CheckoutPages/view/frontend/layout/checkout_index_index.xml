@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Removed Blocks -->
+        <referenceContainer name="header.second.row" remove="true" />
+        <referenceContainer name="header.first.row" remove="true" />
+        <referenceBlock name="header.free-ship" remove="true"/>
+        <referenceBlock name="container.top" remove="true"/>
+        <referenceContainer name="header.container" remove="true"/>
+
+        <referenceContainer name="mln.footer.container" remove="true" />
+        <referenceBlock name="mln.footer" remove="true"/>
+
+        <referenceBlock name="content">
+            <container name="checkout.header" htmlTag="div" htmlClass="checkout-header" before="-">
+                <container name="checkout.header.container" htmlTag="div" htmlClass="checkout-container" before="-">
+                    <container name="checkout.header.wrapper" htmlTag="div" htmlClass="checkout-wrapper" before="-">
+                        <container name="header.left" htmlTag="div" htmlClass="header-left" before="-"/>
+                    </container>
+                </container>
+            </container>
+            <block class="Magento\GiftMessage\Block\Cart\GiftOptions" name="checkout.cart.order.actions.gift_options" template="Magento_GiftMessage::cart/gift_options.phtml" cacheable="false">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="types" xsi:type="array"/>
+                        <item name="components" xsi:type="array">
+                            <item name="giftOptionsCart" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_GiftMessage/js/view/gift-message</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">MLN_CheckoutPages/gift-message</item>
+                                    <item name="formTemplate" xsi:type="string">MLN_CheckoutPages/gift-message-form</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <!-- Moved Blocks -->
+        <move element="logo" destination="header.left" before="-" />
+
+        <referenceBlock name="content">
+          <referenceBlock name="checkout.root">
+              <arguments>
+                  <argument name="jsLayout" xsi:type="array">
+                      <item name="components" xsi:type="array">
+                          <item name="checkout" xsi:type="array">
+                              <item name="children" xsi:type="array">
+                                  <item name="authentication" xsi:type="array">
+                                      <item name="config" xsi:type="array">
+                                          <item name="componentDisabled" xsi:type="boolean">true</item>
+                                      </item>
+                                  </item>
+                                  <item name="steps" xsi:type="array">
+                                      <item name="children" xsi:type="array">
+                                          <!-- The new step you add -->
+                                          <item name="login-step" xsi:type="array">
+                                              <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/login-step</item>
+                                              <!--To display step content before shipping step "sortOrder" value should be < 1-->
+                                              <!--To display step content between shipping step and payment step  1 < "sortOrder" < 2 -->
+                                              <!--To display step content after payment step "sortOrder" > 2 -->
+                                              <item name="sortOrder" xsi:type="string">0</item>
+                                              <item name="children" xsi:type="array">
+                                                  <!--add here child component declaration for your step-->
+                                                  <item name="customer-login" xsi:type="array">
+                                                      <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/form/element/email</item>
+                                                      <item name="displayArea" xsi:type="string">customer-login</item>
+                                                      <item name="tooltip" xsi:type="array">
+                                                          <item name="description" xsi:type="string" translate="true">We'll send your order confirmation here.</item>
+                                                      </item>
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="before-login-form-mln" xsi:type="array">
+                                                              <item name="component" xsi:type="string">uiComponent</item>
+                                                              <item name="displayArea" xsi:type="string">before-login-form-mln</item>
+                                                              <item name="children" xsi:type="array">
+                                                                  <!-- before login form fields -->
+                                                              </item>
+                                                          </item>
+                                                          <item name="additional-login-form-fields-mln" xsi:type="array">
+                                                              <item name="component" xsi:type="string">uiComponent</item>
+                                                              <item name="displayArea" xsi:type="string">additional-login-form-fields-mln</item>
+                                                              <item name="children" xsi:type="array">
+                                                                  <!-- additional login form fields -->
+                                                              </item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                              </item>
+                                          </item>
+                                          <item name="shipping-step" xsi:type="array">
+                                              <item name="children" xsi:type="array">
+                                                  <item name="shippingAddress" xsi:type="array">
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="customer-email" xsi:type="array">
+                                                              <item name="config" xsi:type="array">
+                                                                  <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                              </item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                              </item>
+                                          </item>
+                                          <item name="billing-step" xsi:type="array">
+                                              <item name="children" xsi:type="array">
+                                                  <item name="payment" xsi:type="array">
+                                                      <item name="children" xsi:type="array">
+                                                          <!-- merge your payment methods here -->
+                                                          <item name="afterMethods" xsi:type="array">
+                                                              <item name="component" xsi:type="string">uiComponent</item>
+                                                              <item name="displayArea" xsi:type="string">afterMethods</item>
+                                                              <item name="children" xsi:type="array">
+                                                                  <!-- merge additional data after payment methods here -->
+                                                                  <item name="discount" xsi:type="array">
+                                                                      <item name="config" xsi:type="array">
+                                                                          <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                                      </item>
+                                                                  </item>
+                                                                  <item name="aw-giftcard" xsi:type="array">
+                                                                      <item name="config" xsi:type="array">
+                                                                          <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                                      </item>
+                                                                  </item>
+                                                                  <item name="credit-method" xsi:type="array">
+                                                                      <item name="config" xsi:type="array">
+                                                                          <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                                      </item>
+                                                                  </item>
+                                                              </item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                              </item>
+                                          </item>
+                                          <item name="review-step" xsi:type="array">
+                                              <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/review-step</item>
+                                              <!--To display step content before shipping step "sortOrder" value should be < 1-->
+                                              <!--To display step content between shipping step and payment step  1 < "sortOrder" < 2 -->
+                                              <!--To display step content after payment step "sortOrder" > 2 -->
+                                              <item name="sortOrder" xsi:type="string">3</item>
+                                              <item name="children" xsi:type="array">
+                                                  <item name="agreements" xsi:type="array">
+                                                      <item name="component" xsi:type="string">Magento_CheckoutAgreements/js/view/checkout-agreements</item>
+                                                      <item name="sortOrder" xsi:type="string">100</item>
+                                                      <item name="displayArea" xsi:type="string">before-place-order</item>
+                                                      <item name="dataScope" xsi:type="string">checkoutAgreements</item>
+                                                      <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                  </item>
+                                                  <item name="review_cart_items" xsi:type="array">
+                                                      <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/cart-items</item>
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="details" xsi:type="array">
+                                                              <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details</item>
+                                                              <item name="children" xsi:type="array">
+                                                                  <item name="thumbnail" xsi:type="array">
+                                                                      <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details/thumbnail</item>
+                                                                      <item name="displayArea" xsi:type="string">before_details</item>
+                                                                  </item>
+                                                                  <item name="shipOptionLabel" xsi:type="array">
+                                                                      <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/summary/item/details/shipOptionLabel</item>
+                                                                      <item name="displayArea" xsi:type="string">before_details</item>
+                                                                  </item>
+                                                                  <item name="subtotal" xsi:type="array">
+                                                                      <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details/subtotal</item>
+                                                                      <item name="displayArea" xsi:type="string">after_details</item>
+                                                                  </item>
+                                                                  <item name="message" xsi:type="array">
+                                                                      <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details/message</item>
+                                                                      <item name="displayArea" xsi:type="string">item_message</item>
+                                                                  </item>
+                                                              </item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                                  <!--Gift Options Cart-->
+                                                  <item name="giftOptionsCart" xsi:type="array">
+                                                      <item name="component" xsi:type="string">Magento_GiftMessage/js/view/gift-message</item>
+                                                      <item name="displayArea" xsi:type="string">gift_options</item>
+                                                      <item name="config" xsi:type="array">
+                                                          <item name="template" xsi:type="string">Magento_GiftMessage/gift-message</item>
+                                                          <item name="formTemplate" xsi:type="string">Magento_GiftMessage/gift-message-form</item>
+                                                      </item>
+                                                  </item>
+                                                  <!--Gift Options Cart-->
+                                                  <item name="policyAgreement" xsi:type="array">
+                                                      <item name="component" xsi:type="string">uiComponent</item>
+                                                      <item name="config" xsi:type="array">
+                                                          <item name="template" xsi:type="string">MLN_CheckoutPages/policy-agreement</item>
+                                                      </item>
+                                                  </item>
+                                                  <!--End Gift Option-->
+                                                  <item name="policy-check-main" xsi:type="array">
+                                                      <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/policy-check-main</item>
+                                                      <item name="sortOrder" xsi:type="string">200</item>
+                                                      <item name="config" xsi:type="array">
+                                                          <item name="template" xsi:type="string">MLN_CheckoutPages/policy-check-main</item>
+                                                      </item>
+                                                  </item>
+                                              </item>
+                                          </item>
+                                      </item>
+                                  </item>
+                                  <item name="checkoutFooter" xsi:type="array">
+                                      <item name="component" xsi:type="string">uiComponent</item>
+                                      <item name="template" xsi:type="string">MLN_CheckoutPages/footer</item>
+                                      <item name="displayArea" xsi:type="string">checkout-footer</item>
+                                  </item>
+                                  <item name="sidebar" xsi:type="array">
+                                      <item name="children" xsi:type="array">
+                                          <item name="summary-top" xsi:type="array">
+                                              <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/summary-top</item>
+                                              <item name="template" xsi:type="string">MLN_CheckoutPages/summary-top</item>
+                                              <item name="displayArea" xsi:type="string">summary-top</item>
+                                              <item name="children" xsi:type="array">
+                                                  <item name="summary-discount" xsi:type="array">
+                                                      <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount</item>
+                                                      <item name="sortOrder" xsi:type="string">0</item>
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="errors" xsi:type="array">
+                                                              <item name="sortOrder" xsi:type="string">0</item>
+                                                              <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount-messages</item>
+                                                              <item name="displayArea" xsi:type="string">messages</item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                                  <item name="summary-aw-giftcard" xsi:type="array">
+                                                      <item name="component" xsi:type="string">Aheadworks_Giftcard/js/view/payment/giftcard</item>
+                                                      <item name="sortOrder" xsi:type="string">0</item>
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="errors" xsi:type="array">
+                                                              <item name="sortOrder" xsi:type="string">0</item>
+                                                              <item name="component" xsi:type="string">Aheadworks_Giftcard/js/view/payment/giftcard-messages</item>
+                                                              <item name="displayArea" xsi:type="string">messages</item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                                  <item name="credit-method" xsi:type="array">
+                                                      <item name="component" xsi:type="string">Mirasvit_Credit/js/view/payment/credit</item>
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="errors" xsi:type="array">
+                                                              <item name="sortOrder" xsi:type="string">0</item>
+                                                              <item name="component" xsi:type="string">Mirasvit_Credit/js/view/payment/messages</item>
+                                                              <item name="displayArea" xsi:type="string">messages</item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                              </item>
+                                          </item>
+                                          <item name="summary" xsi:type="array">
+                                              <item name="children" xsi:type="array">
+                                                  <item name="cart_items" xsi:type="array">
+                                                      <item name="config" xsi:type="array">
+                                                          <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                      </item>
+                                                  </item>
+                                                  <item name="totals" xsi:type="array">
+                                                      <item name="sortOrder" xsi:type="string">33</item>
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="shippingText" xsi:type="array">
+                                                              <item name="component" xsi:type="string">uiComponent</item>
+                                                              <item name="template" xsi:type="string">MLN_CheckoutPages/summary/shipping-text</item>
+                                                              <item name="sortOrder" xsi:type="string">33</item>
+                                                          </item>
+                                                          <item name="shipping_protection" xsi:type="array">
+                                                              <item name="component" xsi:type="string">MLN_ShippingProtection/js/view/summary/shipping-protection</item>
+                                                              <item name="config" xsi:type="array">
+                                                                  <item name="title" xsi:type="string" translate="true">Shipping Protection</item>
+                                                              </item>
+                                                              <item name="tooltip" xsi:type="array">
+                                                                  <item name="description" xsi:type="string" translate="true">Shipping Protection covers your package if for any reason a delay is experienced while in transit with our shipping providers.</item>
+                                                              </item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                                  <item name="summary-placeorder" xsi:type="array">
+                                                      <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/placeorder</item>
+                                                      <item name="sortOrder" xsi:type="string">30</item>
+                                                      <item name="children" xsi:type="array">
+                                                          <item name="policy-check-summary" xsi:type="array">
+                                                              <item name="component" xsi:type="string">MLN_CheckoutPages/js/view/policy-check</item>
+                                                              <item name="sortOrder" xsi:type="string">100</item>
+                                                              <item name="config" xsi:type="array">
+                                                                  <item name="template" xsi:type="string">MLN_CheckoutPages/policy-check</item>
+                                                              </item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                              </item>
+                                          </item>
+                                          <item name="shipping-information" xsi:type="array">
+                                              <item name="config" xsi:type="array">
+                                                  <item name="componentDisabled" xsi:type="boolean">true</item>
+                                              </item>
+                                          </item>
+                                      </item>
+                                  </item>
+                              </item>
+                          </item>
+                      </item>
+                  </argument>
+              </arguments>
+          </referenceBlock>
+        </referenceBlock>
+        <referenceContainer name="container.top" remove="true" />
+    </body>
+</page>

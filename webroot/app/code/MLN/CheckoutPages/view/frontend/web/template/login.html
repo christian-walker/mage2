@@ -1,0 +1,38 @@
+<!--Use 'stepCode' as id attribute-->
+<li data-bind="fadeVisible: isVisible, attr: { id: stepCode }">
+    <div class="step-title" data-bind="i18n: 'Checkout'"></div>
+    <p class="step-note" data-bind="i18n: 'Enter your email to begin checkout. Don\'t worry, we won\'t send unwanted emails.'"></p>
+    <div id="checkout-step-content"
+         class="step-content"
+         data-role="content">
+
+        <!-- ko foreach: getRegion('customer-login') -->
+        <!-- ko template: getTemplate() -->
+        <!-- /ko -->
+        <!--/ko-->
+
+        <form class="continue-as-guest" data-bind="submit: navigateToNextStep" novalidate="novalidate">
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <!-- ko if: (isLoggedIn) -->
+                    <button data-bind="fadeVisible: isLoggedIn" data-role="opc-continue" type="submit" class="button action continue guest primary" disabled>
+                        <span><!-- ko i18n: 'Continue'--><!-- /ko --></span>
+                    </button>
+                    <!--/ko-->
+                    <!-- ko if: (!isLoggedIn) -->
+                        <!-- ko if: (email == "") -->
+                        <button data-bind="fadeVisible: !isLoggedIn" data-role="opc-continue" type="submit" class="button action continue guest primary" disabled>
+                            <span><!-- ko i18n: 'Continue as Guest'--><!-- /ko --></span>
+                        </button>
+                        <!--/ko-->
+                        <!-- ko if: (email != "") -->
+                        <button data-bind="fadeVisible: !isLoggedIn" data-role="opc-continue" type="submit" class="button action continue guest primary">
+                            <span><!-- ko i18n: 'Continue as Guest'--><!-- /ko --></span>
+                        </button>
+                        <!--/ko-->
+                    <!--/ko-->
+                </div>
+            </div>
+        </form>
+    </div>
+</li>
