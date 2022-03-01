@@ -1,0 +1,18 @@
+<p>
+    <span data-bind="text: 'Spend '"></span>
+    <span class="amount-left" data-bind="text: '$' + amountLeft()"></span>
+    <span data-bind="text: ' more for free shipping'"></span>
+</p>
+
+<!-- ko if: (promotionsList()) -->
+<div class="promotions-icon-container" data-bind="style: {position: 'relative'}">
+    <!-- ko foreach: { data: promotionsList(), as: 'element' } -->
+    <div data-bind="attr: {class: 'promotion '+ id}, style: {position: 'absolute'}, css: {'_mln-green': (isFulfilled(value))">
+        <div><span class="promo-value"><!-- ko text: '$' + value --><!-- /ko --></span> <span class="promo-title"><!-- ko text: title --><!-- /ko --></span></div>
+    </div>
+    <!--/ko-->
+</div>
+<!--/ko-->
+
+
+<div id="progressbar" data-bind="afterRender:getPromotionProgress"></div>
