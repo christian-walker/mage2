@@ -36,6 +36,25 @@ define([
 
             },
 
+            promotionAmount: function (){
+                let promos = this.miniCart.promotions;
+
+                if(promos) {
+
+                    //let promoAmounts = [];
+
+                    for (let i = 0; i < promos.length; i++) {
+
+                        let promoValue = promos[i].value,
+                            promoTitle = promos[i].title;
+
+                        if(promoValue > this.subtotal()){
+                            return promoValue - this.subtotal() + ' for ' + promoTitle;
+                        }
+                    }
+                }
+            },
+
 
             /**
              * Returns progress bar value
@@ -62,6 +81,8 @@ define([
                 // Checks subtotal and promotion value existence, then compares to total and toggles class
                 if(this.subtotal()){
 
+                    this.promotionAmount();
+
                     if(promos) {
 
                         for (let i = 0; i < promos.length; i++) {
@@ -75,6 +96,8 @@ define([
                                 if(element){
                                     selector.css('left', leftPosition+'%');
                                 }
+
+
 
                                 if (this.subtotal() >= promoValue) {
                                     // if class already exist do nothing
@@ -95,7 +118,14 @@ define([
                         if(subtotal >= maxValue){
                             amountLeft = 0;
                             this.amountLeft(amountLeft);
-                        } else{
+                        }
+
+                        if(subtotal >= maxValue){
+                            amountLeft = 0;
+                            this.amountLeft(amountLeft);
+                        }
+
+                        else{
 
                             // Round Parse and Round to 2 decimal places
 

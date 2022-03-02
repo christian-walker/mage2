@@ -1,7 +1,6 @@
 <p>
     <span data-bind="text: 'Spend '"></span>
-    <span class="amount-left" data-bind="text: '$' + amountLeft()"></span>
-    <span data-bind="text: ' more for free shipping'"></span>
+    <span class="amount-left" data-bind="text: '$' + promotionAmount()"></span>
 </p>
 
 <!-- ko if: (promotionsList()) -->
